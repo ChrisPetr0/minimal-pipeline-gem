@@ -52,7 +52,12 @@ class MinimalPipeline
     def params(parameters)
       parameter_list = []
       parameters.each do |k, v|
-        parameter_list.push(parameter_key: k, parameter_value: v)
+        case v
+        when 'UsePreviousValue'
+          parameter_list.push(parameter_key: k, use_previous_value: true)
+        else
+          parameter_list.push(parameter_key: k, parameter_value: v)
+        end
       end
       parameter_list
     end
